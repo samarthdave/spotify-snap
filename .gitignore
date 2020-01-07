@@ -1,0 +1,4 @@
+node_modules/
+# all image files
+*.png
+*.jpg
