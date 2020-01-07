@@ -1,6 +1,7 @@
 const { prompt, Select } = require('enquirer');
 
 const { isValidFilename, changeFilename } = require('./utils');
+const { downloadImage } = require('./browser');
 
 const ask = new Select({
   name: 'type',
@@ -18,10 +19,12 @@ const main = async () => {
     initial: '69uxyAqqPIsUyTO8txoP2M'
   });
 
-  return {
+  const res = {
     type,
     media_id
   };
+
+  return await downloadImage(res);
 };
 
 main()
@@ -29,5 +32,3 @@ main()
     console.log(res);
     console.log('Done...');
   })
-
-// console.log(response); // { username: 'jonschlinkert' }
