@@ -9,6 +9,7 @@
   "author": "Samarth Dave",
   "license": "ISC",
   "dependencies": {
+    "enquirer": "^2.3.2",
     "puppeteer": "^2.0.0"
   }
 }

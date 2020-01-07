@@ -19,6 +19,14 @@ const file_loc = path.join(__dirname, 'media', `${filename}.jpg`);
   // load the page  
   await page.goto(url);
 
+  // remove play button - https://stackoverflow.com/questions/50867065/puppeteer-removing-elements-by-class
+  const playButtonSelector = '#main > div > div > div.ai.au.ah.av > div.ah.aw.ax.ay.az.b0.b1.b2 > div > div > button';
+  await page.evaluate((sel) => {
+    let button = document.querySelector(sel);
+    button.remove();
+  }, playButtonSelector);
+
+
   await page.screenshot({
     path: file_loc
   });
