@@ -1,6 +1,6 @@
 const { prompt, Select } = require('enquirer');
 
-const { isValidFilename, changeFilename } = require('./utils');
+// const { isValidFilename, changeFilename } = require('./utils');
 const { downloadImage } = require('./browser');
 
 const ask = new Select({
