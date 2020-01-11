@@ -4,20 +4,14 @@ const path = require('path');
 const filename = 'media';
 const file_loc = path.join(__dirname, 'media', `${filename}.jpg`);
 
-const viewport = {
-  width: 300,
-  height: 80,
-  deviceScaleFactor: 1
-}
-
-const downloadImage = async ({ type, media_id }) => {
+const downloadImage = async ({ type, media_id }, viewportConfig) => {
   const url = `https://open.spotify.com/embed/${type}/${media_id}`;
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   // resize the page before loading the page
-  await page.setViewport(viewport);
+  await page.setViewport(viewportConfig);
   await page.goto(url); // visit the page
 
   // remove play button - https://stackoverflow.com/questions/50867065/puppeteer-removing-elements-by-class
