@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 
+const utils = require('./utils');
+
 const filename = 'media';
 const file_loc = path.join(__dirname, 'media', `${filename}.jpg`);
 
@@ -14,9 +16,13 @@ const prettyPrintResponse = async ({ date, via, status, url }) => {
   return true;
 }
 
-const downloadImage = async ({ type, media_id }, viewportConfig) => {
-  const url = encodeURI(`https://open.spotify.com/embed/${type}/${media_id}`);
+const downloadImage = async (res, viewportConfig) => {
+  // validate URL integrity & media type
+  const { type, media_id } = utils.validateMedia(res);
+  // build from the validated data
+  const url = encodeURI(utils.buildURL({ type, media_id }));
 
+  // launch
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -30,6 +36,7 @@ const downloadImage = async ({ type, media_id }, viewportConfig) => {
   const { status: statusCode } = headers;
   // check if successful load
   if (statusCode !== '200') {
+    await browser.close();
     return new Error(`Invalid url, status code: ${statusCode}`);
   }
 

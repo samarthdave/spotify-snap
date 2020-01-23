@@ -48,6 +48,6 @@ const main = async () => {
 
 main()
   .then((res) => {
-    console.log(res);
+    console.log(`Save loc: ${res}`);
     console.log('Done...');
-  })
+  });
