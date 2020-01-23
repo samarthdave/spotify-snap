@@ -20,8 +20,6 @@ const imageType = new Select({
 
 const main = async () => {
   const type = await askType.run();
-  const imageSize = await imageType.run();
-  const imageConfig = CONSTANTS[imageSize];
 
   const { media_id } = await prompt({
     type: 'input',
@@ -30,12 +28,22 @@ const main = async () => {
     initial: '69uxyAqqPIsUyTO8txoP2M'
   });
 
+  const imageSize = await imageType.run();
+  const imageConfig = CONSTANTS[imageSize];
+
   const res = {
     type,
     media_id
   };
 
-  return await downloadImage(res, imageConfig);
+  let imageResponse;
+  try {
+    imageResponse = await downloadImage(res, imageConfig)
+  } catch(e) {
+    imageResponse = e;
+  }
+
+  return imageResponse;
 };
 
 main()

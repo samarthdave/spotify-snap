@@ -2,14 +2,16 @@
   "name": "spotify-share",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "prompt.js",
   "scripts": {
+    "start": "node prompt.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Samarth Dave",
   "license": "ISC",
   "dependencies": {
     "enquirer": "^2.3.2",
-    "puppeteer": "^2.0.0"
+    "puppeteer": "^2.0.0",
+    "validator": "^12.1.0"
   }
 }

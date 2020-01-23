@@ -11,7 +11,6 @@ const changeFilename = (probe) => {
   
   // then add jpg to the end...
   return final.concat('.jpg');
-
 };
 
 module.exports = {
