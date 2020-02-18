@@ -42,7 +42,9 @@ const main = async () => {
 
   let imageResponse;
   try {
-    imageResponse = await downloadImage(res, imageConfig)
+    imageResponse = await downloadImage({
+      songs: [{ res, imageConfig }]
+    });
   } catch(e) {
     imageResponse = e;
   }
@@ -54,4 +56,7 @@ main()
   .then((res) => {
     console.log(`Save loc: ${res}`);
     console.log('Done...');
+  })
+  .catch((err) => {
+    console.error(err);
   });
