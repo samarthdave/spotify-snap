@@ -4,6 +4,10 @@ const { prompt, Select } = require('enquirer');
 const { downloadImage } = require('./browser');
 const CONSTANTS = require('./constants');
 
+// default song (MIDDLE CHILD - J. Cole)
+// track/2JvzF1RMd7lE3KmFlsyZD8
+// https://open.spotify.com/embed/track/2JvzF1RMd7lE3KmFlsyZD8
+
 const askType = new Select({
   name: 'type',
   message: 'Is it an album or a track?',
@@ -25,7 +29,7 @@ const main = async () => {
     type: 'input',
     name: 'media_id',
     message: `What is the ${type} link/id?`,
-    initial: '69uxyAqqPIsUyTO8txoP2M'
+    initial: '2JvzF1RMd7lE3KmFlsyZD8'
   });
 
   const imageSize = await imageType.run();

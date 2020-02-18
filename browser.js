@@ -4,7 +4,6 @@ const path = require('path');
 const utils = require('./utils');
 
 const filename = 'media';
-const file_loc = path.join(__dirname, 'media', `${filename}.jpg`);
 
 const prettyPrintResponse = async ({ date, via, status, url }) => {
   console.log('------------------------------');
@@ -46,6 +45,15 @@ const downloadImage = async (res, viewportConfig) => {
     let button = document.querySelector(sel);
     button.remove();
   }, playButtonSelector);
+
+  // get song name return object string name
+  const songNameSelector = '#main > div > div > div.ai.au.ah.av > div.ah.bk.bl > div > div.ah.bm.b6.bn > a > div.ae.bv.bt.bu.bw.bx.by.bz > span';
+  const element = await page.$(songNameSelector);
+  
+  // extract text from element & validate file name
+  const songText = await page.evaluate(element => element.textContent, element);
+  const filename = utils.changeFilename(songText, 'media');
+  const file_loc = path.join(__dirname, 'media', `${filename}.jpg`);
 
   // take the photo
   await page.screenshot({

@@ -2,3 +2,6 @@ node_modules/
 # all image files
 *.png
 *.jpg
+
+# all csv/data files
+*.csv

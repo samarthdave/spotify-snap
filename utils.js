@@ -9,11 +9,11 @@ const buildURL = ({ type, media_id }) => {
   return `https://open.spotify.com/embed/${type}/${media_id}`;
 };
 
-const changeFilename = (probe) => {
+const changeFilename = (probe, fallback) => {
   // split by space and join with underscores
   const newName = probe.toLowerCase().split(' ').join('-');
 
-  let final = isValidFilename(newName) ? newName : probe;
+  let final = isValidFilename(newName) ? newName : fallback;
   
   // then add jpg to the end...
   return final.concat('.jpg');
