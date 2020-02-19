@@ -3,11 +3,13 @@ const path = require('path');
 
 const utils = require('./utils');
 
-const prettyPrintResponse = async ({ date, via, status, url }) => {
+const prettyPrintResponse = async ({ date, via, status, url, songText, file_loc }) => {
   console.log('------------------------------');
-  console.log(`URL: ${url}`);
-  console.log(`Access: ${date}`);
-  console.log(`Via: ${via}`);
+  console.log(`Title        : ${songText}`);
+  console.log(`File Name    : ${file_loc}`);
+  console.log(`URL          : ${url}`);
+  console.log(`Access       : ${date}`);
+  console.log(`Via          : ${via}`);
   console.log(`Response Code: ${status}`);
   console.log('------------------------------');
   return true;
@@ -36,7 +38,6 @@ const downloadImage = async ({ songs }) => {
 
     // check status of page
     const headers = response.headers();
-    await prettyPrintResponse({ ...headers, url });
     const { status: statusCode } = headers;
     // check if successful load
     if (statusCode !== '200') {
@@ -57,17 +58,19 @@ const downloadImage = async ({ songs }) => {
     
     // extract text from element & validate file name
     const songText = await page.evaluate(element => element.textContent, element);
-    const filename = utils.changeFilename(songText, 'media');
-    const file_loc = path.join(__dirname, 'media', `${filename}.jpg`);
+    const filename = utils.changeFilename(songText, 'media'); // returns "*.jpg"
+    const file_loc = path.join(__dirname, 'media', filename);
 
-    // take the photo
+    await prettyPrintResponse({ ...headers, url, songText, file_loc });
+
+    // take a photo
     await page.screenshot({
       path: file_loc
     });
 
     songPaths[i] = file_loc;
   } // end for loop
-  
+ 
   await browser.close();
 
   return songPaths;

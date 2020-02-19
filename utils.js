@@ -19,6 +19,10 @@ const changeFilename = (probe, fallback) => {
   return final.concat('.jpg');
 };
 
+// validateMedia
+// take in URL or weird colon formats as shown here:
+// https://developer.spotify.com/documentation/widgets/generate/play-button/
+// returns proper media id & type
 const validateMedia = (res) => {
   let { type, media_id } = res;
 
@@ -29,11 +33,11 @@ const validateMedia = (res) => {
     // get last 2 items
     const pathsSize = paths.length;
     if (pathsSize < 2) {
-      return new Error(`Invalid input. Cannot parse ${media_id}`);
+      return new Error(`Invalid URL length. Cannot parse ${media_id}`);
     }
     // the last 2 items contain the data (ideally)
     return {
-      media_id: paths[pathsSize-1], // .../album/MEDIA  _ID
+      media_id: paths[pathsSize-1], // .../album/MEDIA_ID
       type: paths[pathsSize-2]      // .../track/...
     };
   }
@@ -52,13 +56,16 @@ const validateMedia = (res) => {
   // eg. "1DFixLWuPkv3KT3TnV35m3" --> "...open.spotify.com/.../1DFixLWuPkv3KT3TnV35m3"
   const generatedURL = buildURL({ media_id, type });
   if (validator.isURL(generatedURL)) {
-    return { media_id, type }
+    return { media_id, type };
   }
   
   console.log(new Error(`ERROR: Cannot validate ${media_id} OR ${type}`));
-  // return the default
+  console.log(new Error(`URL Generated: ${generatedURL}`));
+  
+  // return the default (MIDDLE CHILD)
+  // this song has been on repeat since last year whoops...
   return {
-    media_id: '1DFixLWuPkv3KT3TnV35m3',
+    media_id: '2JvzF1RMd7lE3KmFlsyZD8',
     type: 'track'
   };
 };
