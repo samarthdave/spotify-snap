@@ -2,6 +2,8 @@ node_modules/
 # all image files
 *.png
 *.jpg
+# except middle-child example in the media folder
+!media/middle-child.jpg
 
 # all csv/data files
 *.csv

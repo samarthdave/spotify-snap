@@ -1,16 +1,26 @@
 # SpotifySnap :notes:
 "Snap" a photo of a track or album on Spotify
 
-Using puppeteer might be overkill but here goes!
-
 ## What it does
-- Downloads a track based on the id
+- Downloads an image of a track based on the id
+- helped fill my [100-days-of-code](https://github.com/samarthdave/100-days-of-code) repository w/ images
+- generates an image like below from a given track id
 
-### Getting started
+![Generated Image (Middle Child)](/media/middle-child.jpg)
+
+### Usage
 ```
 npm install # see below if errors install Puppeteer
 node prompt.js
+# ...
+# ? Is it an album or a track? ... track
+# ? What is the track link/id? 2JvzF1RMd7lE3KmFlsyZD8
+# ... downloads MIDDLE CHILD by J Cole into media folder
 ```
+
+### Tools used
+- enquirer - great tool for CLIs
+- Puppeteer (runs Chromium) - is it overkill? yes
 
 #### Problems I ran into
 - If puppeteer does not install, use the following command (from issue #[375](https://github.com/puppeteer/puppeteer/issues/375)):
