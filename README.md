@@ -1,4 +1,4 @@
-# SpotifySnap :notes:
+# TuneSnap :notes:
 "Snap" a photo of a track or album on Spotify
 
 ## What it does
@@ -7,6 +7,11 @@
 - generates an image like below from a given track id
 
 ![Generated Image (Middle Child)](/media/middle-child.jpg)
+
+## Install
+```
+npm install --save tunesnap
+```
 
 ### Usage
 ```
