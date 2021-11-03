@@ -13,6 +13,6 @@
     "csv-parser": "^2.3.2",
     "enquirer": "^2.3.2",
     "puppeteer": "^2.0.0",
-    "validator": "^12.1.0"
+    "validator": "^13.7.0"
   }
 }
